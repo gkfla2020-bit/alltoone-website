@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All to One | AI Media Pipeline</title>
+  <meta property="og:title" content="㈜올투원 | AI 미디어 파이프라인">
+  <meta property="og:description" content="데이터 하나로, 미디어 전체를 움직이다.">
+  <meta property="og:image" content="AI미디어 파이프라인.png">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden;scroll-snap-type:y proximity}
+    body{font-family:'Inter','Noto Sans KR',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;transition:all .4s ease}
+    nav.scrolled{background:rgba(0,0,0,.8);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);padding:18px 48px}
+    .nav-logo{font-size:18px;font-weight:800;letter-spacing:3px;color:#fff;text-decoration:none;text-transform:uppercase}
+    .nav-links{display:flex;gap:36px;list-style:none}
+    .nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;transition:color .3s}
+    .nav-links a:hover{color:#fff}
+
+    /* FULLSCREEN SECTION */
+    .fs{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(50px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+    .rv.on{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}.d5{transition-delay:.6s}
+
+    /* HERO */
+    .hero{flex-direction:column;text-align:center;background:radial-gradient(ellipse at 50% 40%,#0a1a3a 0%,#000 70%);padding:0 24px}
+    .hero-tag{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:32px;font-weight:500}
+    .hero h1{font-size:clamp(40px,7vw,88px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:28px}
+    .hero h1 span{display:block;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:clamp(15px,1.8vw,18px);color:rgba(255,255,255,.6);font-weight:300;line-height:1.8;max-width:520px}
+    .scroll-cue{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
+    .scroll-cue span{font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.25);text-transform:uppercase}
+    .scroll-cue .line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* SECTION COMMON */
+    .sec{padding:160px 48px;position:relative}
+    .sec-dark{background:linear-gradient(180deg,#000,#060e1a 50%,#000)}
+    .sec-center{max-width:720px;margin:0 auto;text-align:center}
+    .tag{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:20px;font-weight:500}
+    h2{font-size:clamp(28px,4.5vw,52px);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:20px;color:#fff}
+    .desc{font-size:15px;color:rgba(255,255,255,.65);line-height:1.8;font-weight:300;max-width:600px}
+    .sec-center .desc{margin:0 auto}
+
+    /* TWO COL */
+    .two{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .two.flip .media{order:-1}
+    .text .tag{text-align:left}
+    .text .desc{margin-bottom:0}
+    .text p{color:rgba(255,255,255,.65)}
+
+    /* MEDIA */
+    .vid{border-radius:20px;overflow:hidden;aspect-ratio:16/9;background:#0a0a0a;box-shadow:0 60px 120px rgba(0,0,0,.6)}
+    .vid iframe{width:100%;height:100%;border:none}
+    .img-box{border-radius:20px;overflow:hidden;box-shadow:0 60px 120px rgba(0,0,0,.6)}
+    .img-box img{width:100%;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+    .img-box:hover img{transform:scale(1.03)}
+
+    /* PIPELINE */
+    .pipe-img{max-width:960px;margin:64px auto 0}
+    .pipe-img img{width:100%;border-radius:20px;box-shadow:0 60px 120px rgba(0,0,0,.6)}
+    .steps{max-width:1100px;margin:72px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .step{text-align:center;padding:36px 20px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);transition:all .4s ease}
+    .step:hover{background:rgba(255,255,255,.05);transform:translateY(-6px);border-color:rgba(74,158,255,.2)}
+    .step-n{font-size:28px;font-weight:900;background:linear-gradient(135deg,#4a9eff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
+    .step h3{font-size:14px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px}
+    .step p{font-size:12px;color:rgba(255,255,255,.55);line-height:1.7}
+
+    /* SERVICE CARDS */
+    .svc-grid{max-width:1100px;margin:72px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .svc{padding:48px 32px;border-radius:24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);transition:all .4s ease;position:relative;overflow:hidden}
+    .svc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(74,158,255,.3),transparent);opacity:0;transition:opacity .4s}
+    .svc:hover{transform:translateY(-6px);border-color:rgba(74,158,255,.15)}.svc:hover::before{opacity:1}
+    .svc-icon{font-size:32px;margin-bottom:24px}
+    .svc h3{font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+    .svc .sub{font-size:12px;color:rgba(74,158,255,.6);margin-bottom:16px;font-weight:500;letter-spacing:.5px}
+    .svc p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.8}
+
+    /* PODCAST VID */
+    .pod-vid{max-width:880px;margin:64px auto 0;border-radius:20px;overflow:hidden;aspect-ratio:16/9;background:#0a0a0a;box-shadow:0 60px 120px rgba(0,0,0,.6)}
+    .pod-vid iframe{width:100%;height:100%;border:none}
+
+    /* CHAR */
+    .char-wrap{max-width:560px;margin:64px auto 0}
+    .char-wrap img{width:100%;border-radius:28px;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+    .char-wrap:hover img{transform:scale(1.03)}
+
+    /* CTA */
+    .cta-btn{display:inline-block;padding:16px 52px;background:#fff;color:#000;text-decoration:none;font-size:14px;font-weight:700;border-radius:60px;letter-spacing:.5px;transition:all .3s ease;margin-top:36px}
+    .cta-btn:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(255,255,255,.12)}
+
+    /* FOOTER */
+    footer{padding:48px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+    .ft-info{font-size:12px;color:rgba(255,255,255,.25);line-height:2}
+    .ft-links{margin-top:12px;display:flex;justify-content:center;gap:24px}
+    .ft-links a{font-size:11px;color:rgba(255,255,255,.3);text-decoration:none;transition:color .3s}
+    .ft-links a:hover{color:rgba(255,255,255,.6)}
+
+    /* MOBILE */
+    @media(max-width:768px){
+      nav{padding:16px 20px}nav.scrolled{padding:14px 20px}
+      .nav-links{display:none}
+      .sec{padding:100px 20px}
+      .two{grid-template-columns:1fr;gap:48px}.two.flip .media{order:0}
+      .steps{grid-template-columns:1fr 1fr;gap:12px}
+      .svc-grid{grid-template-columns:1fr;gap:12px}
+      .hero h1{letter-spacing:-1px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nb" role="navigation" aria-label="메인 네비게이션">
+    <a href="#" class="nav-logo">All to One</a>
+    <ul class="nav-links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#pipeline">파이프라인</a></li>
+      <li><a href="#services">서비스</a></li>
+      <li><a href="#podcast">팟캐스트</a></li>
+      <li><a href="#characters">캐릭터</a></li>
+      <li><a href="#contact">문의</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="fs hero">
+    <div class="rv hero-tag">AWS-Powered AI Media Tech</div>
+    <h1 class="rv d1"><span>데이터 하나로,</span><span>미디어 전체를 움직이다</span></h1>
+    <p class="rv d2 hero-sub">클라우드 AI 인프라 위에서<br>콘텐츠 생산 방식 자체를 혁신합니다</p>
+    <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+  </section>
+
+  <!-- ABOUT + VIDEO -->
+  <section class="sec" id="about">
+    <div class="two">
+      <div class="text rv">
+        <div class="tag">About</div>
+        <h2>AI 파이프라인으로<br>미디어를 자동 생산합니다</h2>
+        <p class="desc">㈜올투원은 AWS의 AI API와 클라우드 인프라를 결합한 독자적 미디어 파이프라인으로, 단 하나의 데이터에서 영상·오디오·텍스트 콘텐츠를 동시에 생산합니다. 기존 대비 90% 이상 리소스를 절감하면서 트래픽을 극대화합니다.</p>
+      </div>
+      <div class="media rv d2">
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/f7eUi6faPqA?autoplay=1&mute=1&loop=1&playlist=f7eUi6faPqA&rel=0&modestbranding=1&enablejsapi=1" title="올투원 소개" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section class="sec sec-dark" id="pipeline">
+    <div class="sec-center">
+      <div class="tag rv">AI Media Pipeline</div>
+      <h2 class="rv d1">완전 자동화된<br>콘텐츠 생산 엔진</h2>
+      <p class="desc rv d2">데이터 → 콘텐츠 → 오디오 → 글로벌 확산</p>
+    </div>
+    <div class="pipe-img rv d3">
+      <img src="AI미디어 파이프라인.png" alt="AI 미디어 파이프라인 구조도" loading="lazy">
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="step-n">01</div><h3>Amazon Bedrock</h3><p>전문 콘텐츠를 타겟별 멀티포맷으로 동시 생성</p></div>
+      <div class="step rv d1"><div class="step-n">02</div><h3>Amazon Polly</h3><p>자연스러운 팟캐스트 및 Lo-Fi 오디오로 즉시 변환</p></div>
+      <div class="step rv d2"><div class="step-n">03</div><h3>Amazon S3</h3><p>미디어 자산을 안전하게 저장·관리</p></div>
+      <div class="step rv d3"><div class="step-n">04</div><h3>Amazon CloudFront</h3><p>전 세계 무지연 전송, 자동 스케일링</p></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="sec" id="services">
+    <div class="sec-center">
+      <div class="tag rv">Services</div>
+      <h2 class="rv d1">올투원의 솔루션</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc rv">
+        <div class="svc-icon">⚡</div>
+        <h3>이지업 EasyUp</h3>
+        <div class="sub">AI 미디어 퍼블리싱</div>
+        <p>AI 자동화 파이프라인과 연동되어 SEO 최적화 콘텐츠를 자동 생산하는 트래픽 제너레이터</p>
+      </div>
+      <div class="svc rv d1">
+        <div class="svc-icon">📊</div>
+        <h3>비즈업 BizUp</h3>
+        <div class="sub">데이터 기반 컨설팅</div>
+        <p>클라우드 빅데이터 분석 기반 맞춤형 비즈니스 로드맵 설계 및 스케일업 지원</p>
+      </div>
+      <div class="svc rv d2">
+        <div class="svc-icon">🌐</div>
+        <h3>힐링업 HealingUp</h3>
+        <div class="sub">크로스보더 헬스케어</div>
+        <p>글로벌 트래픽 기반 외국인 환자 유치 및 건강기능식품·의료기기 수출</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EASYUP VIDEO -->
+  <section class="sec sec-dark" id="easyup-vid">
+    <div class="two flip">
+      <div class="text rv">
+        <div class="tag">EasyUp in Action</div>
+        <h2>에이전틱 AI가 만드는<br>차세대 미디어</h2>
+        <p class="desc">사용자는 최소한의 입력만으로 전문 콘텐츠를 대량 생산합니다. AWS 클라우드 위에서 트래픽 규모에 관계없이 안정적으로 확장됩니다.</p>
+      </div>
+      <div class="media rv d2">
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/HWAcOtPFSWc?autoplay=1&mute=1&loop=1&playlist=HWAcOtPFSWc&rel=0&modestbranding=1&enablejsapi=1" title="EasyUp 소개" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODCAST -->
+  <section class="sec" id="podcast">
+    <div class="sec-center">
+      <div class="tag rv">AI Podcast</div>
+      <h2 class="rv d1">AI가 제작하는<br>멀티모달 팟캐스트</h2>
+      <p class="desc rv d2">Amazon Polly 음성 합성으로 전문 콘텐츠를<br>자연스러운 팟캐스트로 자동 변환합니다</p>
+    </div>
+    <div class="pod-vid rv d3">
+      <iframe src="https://www.youtube.com/embed/n4X0wqgGpgc?autoplay=1&mute=1&loop=1&playlist=n4X0wqgGpgc&rel=0&modestbranding=1&enablejsapi=1" title="AI 팟캐스트" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- CHARACTERS + CHATBOT -->
+  <section class="sec sec-dark" id="characters">
+    <div class="two">
+      <div class="text rv">
+        <div class="tag">AI Healthcare Agent</div>
+        <h2>거룡이와 토당이</h2>
+        <p class="desc">친근한 캐릭터 IP를 대화형 AI 헬스케어 에이전트로 진화시키고 있습니다. Amazon Bedrock + RAG 기술로 24시간 전문 건강 상담을 제공하며, 감정 분석 기반 맞춤 힐링과 스마트 문진까지 원스톱으로 처리합니다.</p>
+      </div>
+      <div class="media rv d2">
+        <div class="char-wrap" style="margin:0">
+          <img src="images/거룡이와토당이.png" alt="거룡이와 토당이" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <!-- Chatbot example below -->
+    <div class="two" style="margin-top:120px">
+      <div class="media rv">
+        <div class="img-box">
+          <img src="헬스케어챗봇시연예시.jpg" alt="AI 헬스케어 챗봇 시연" loading="lazy">
+        </div>
+      </div>
+      <div class="text rv d2">
+        <div class="tag">Chatbot Demo</div>
+        <h2>AI 헬스케어 챗봇</h2>
+        <p class="desc">거룡이가 실제 대화하듯 건강 상담을 진행합니다. 단순 키워드 응답을 넘어, 병원의 실제 진료 데이터를 바탕으로 전문적이고 따뜻한 상담을 제공합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact">
+    <div class="sec-center">
+      <div class="rv">
+        <div class="tag">Contact</div>
+        <h2>함께 미디어의 미래를<br>만들어갑니다</h2>
+        <p class="desc">AI 미디어 파이프라인 도입 및 협업 문의</p>
+        <a href="mailto:one@alltoone.co.kr" class="cta-btn">문의하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-info">
+      ㈜올투원 · 대표 우승호 · 서울시 용산구 이촌로64길24 샘물빌딩 301호<br>
+      사업자등록번호 630-86-01070 · 02-6959-7044 · one@alltoone.co.kr
+    </div>
+    <div class="ft-links">
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </div>
+    <p class="ft-info" style="margin-top:16px">© 2026 All to One Inc. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const nb=document.getElementById('nb');
+    window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>60));
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+    document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}));
+  </script>
+</body>
+</html>
