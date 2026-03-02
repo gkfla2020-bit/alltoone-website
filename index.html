@@ -424,6 +424,14 @@
       box-shadow: none;
     }
 
+    /* ===== YT LINK ===== */
+    .yt-link {
+      display: inline-block; margin-top: 20px;
+      font-size: 12px; color: var(--accent); font-weight: 500;
+      letter-spacing: .5px; transition: color .3s;
+    }
+    .yt-link:hover { color: var(--fg); }
+
     /* ===== FOOTER ===== */
     footer {
       padding: 48px 56px; text-align: center;
@@ -519,7 +527,7 @@
       <div class="text rv">
         <div class="tag">About All to One</div>
         <h2>AI 파이프라인 하나로<br>대규모 미디어를 자동 생산</h2>
-        <p class="desc">㈜올투원은 전통적인 오프라인 도메인 지식을 무한한 디지털 미디어 자산으로 확장하는 AI 미디어 테크 기업입니다. AWS의 AI API와 클라우드 인프라를 결합한 독자적 파이프라인으로, 단 하나의 데이터에서 영상·오디오·텍스트 콘텐츠를 동시에 생산합니다.</p>
+        <p class="desc">㈜올투원은 오프라인 도메인 지식을 무한한 디지털 미디어 자산으로 확장하는 AI-Native 미디어 테크 기업입니다. AWS 클라우드 인프라를 전면 도입해 콘텐츠 기획·생성·배포·분석의 전 과정을 자동화하는 초자동화 시스템을 구축했습니다. 단 하나의 데이터에서 영상·오디오·텍스트를 동시에 생산하며, 진료에 집중하는 병원 대신 디지털 경영을 담당합니다.</p>
       </div>
       <div class="media rv d2">
         <div class="vid">
@@ -534,7 +542,7 @@
     <div class="ctr">
       <div class="tag rv">Our Technology</div>
       <h2 class="rv d1">완전 자동화된<br>콘텐츠 생산 엔진</h2>
-      <p class="desc rv d2">단 하나의 행 데이터만으로 대규모 미디어 트래픽을 창출하도록 설계된<br>AWS 기반 독자적 미디어 파이프라인</p>
+      <p class="desc rv d2">단 하나의 행 데이터만으로 대규모 미디어 트래픽을 창출하도록 설계된 AWS 기반 독자적 미디어 파이프라인</p>
     </div>
     <div class="pipe-img rv d3">
       <img src="https://raw.githubusercontent.com/gkfla2020-bit/alltoone-website/main/AI%EB%AF%B8%EB%94%94%EC%96%B4%20%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8.png" alt="AI 미디어 파이프라인 구조도" loading="lazy">
@@ -569,9 +577,12 @@
       <div class="text rv">
         <div class="tag">Use Case</div>
         <span class="rv case-badge">Success Story</span>
-        <h2>한의학 도메인의<br>멀티모달 미디어 전환</h2>
-        <p class="desc">남성역 이수한의원의 진료 데이터를 AI 파이프라인으로 로파이 음악, 팟캐스트, 블로그, 인포그래픽으로 동시 변환. 스튜디오 녹음이나 성우 없이 병원의 전문성과 브랜드를 전달하는 미디어 자산을 구축했습니다.</p>
-        <a href="https://youtube.com/@isu_hani" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;font-size:12px;color:var(--accent);font-weight:500;letter-spacing:.5px;transition:color .3s">YouTube 채널 보기 →</a>
+        <h2>B2B 도메인 지식의<br>미디어 자산화</h2>
+        <p class="desc" style="margin-bottom:12px;color:var(--accent);font-size:12px;font-weight:600">Challenge</p>
+        <p class="desc">한의학이라는 전문적이고 무거운 진료 데이터를 대중이 쉽게 소비할 수 있는 형태로 변환할 필요성.</p>
+        <p class="desc" style="margin-top:16px;margin-bottom:12px;color:var(--accent);font-size:12px;font-weight:600">Solution</p>
+        <p class="desc">AI 파이프라인으로 로파이 음악, 팟캐스트, 블로그, 인포그래픽을 동시 생산. 스튜디오 녹음이나 성우 없이 전방위 디지털 미디어 생태계를 구축했습니다.</p>
+        <a href="https://youtube.com/@isu_hani" target="_blank" rel="noopener" class="yt-link rv">YouTube 채널 보기 →</a>
         <div class="rv case-metrics">
           <div class="metric"><div class="num">90%+</div><div class="label">리소스 절감</div></div>
           <div class="metric"><div class="num">1→N</div><div class="label">원소스 멀티유즈</div></div>
@@ -603,7 +614,7 @@
     <div class="ctr">
       <div class="tag rv">Services</div>
       <h2 class="rv d1">올투원의 솔루션</h2>
-      <p class="desc rv d2">AI 미디어 파이프라인을 기반으로 한 통합 솔루션</p>
+      <p class="desc rv d2">AWS 클라우드 AI 인프라 위에서 구동되는 통합 솔루션</p>
     </div>
     <div class="svc-grid">
       <div class="svc rv">
@@ -667,16 +678,19 @@
         <div class="v-num">NEXT 01</div>
         <h3>에이전틱 AI<br>미디어 자동화 데스크</h3>
         <p>AI 에이전트가 자율적으로 트렌드를 분석하고 주제를 선정하여, 초안 작성부터 이미지 생성, 다국어 번역까지 수행하는 에이전틱 AI 뉴스룸을 구축합니다.</p>
+        <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip">Bedrock Agents</span><span class="chip">Lambda</span></div>
       </div>
       <div class="v-card rv d1">
         <div class="v-num">NEXT 02</div>
         <h3>초개인화<br>다이내믹 퍼블리싱</h3>
         <p>독자의 정보 소비 성향에 맞춰 동일한 콘텐츠를 인포그래픽·오디오·상세 텍스트 등 다양한 버전으로 실시간 자동 변환하여 제공합니다.</p>
+        <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip">Personalize</span><span class="chip">CloudFront</span></div>
       </div>
       <div class="v-card rv d2">
         <div class="v-num">NEXT 03</div>
         <h3>데이터 시각화<br>자동화 솔루션</h3>
         <p>복잡한 정책·시장 지표·금융 데이터 등의 로우 데이터를 입력하면, 주요 인사이트를 추출해 즉각적으로 고품질 인포그래픽으로 렌더링합니다.</p>
+        <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip">QuickSight</span><span class="chip">Bedrock</span></div>
       </div>
     </div>
   </section>
@@ -687,7 +701,7 @@
       <div class="rv">
         <div class="tag">Contact Us</div>
         <h2>당신의 도메인 지식을<br>무한한 미디어 자산으로</h2>
-        <p class="desc">AI 미디어 파이프라인 도입 및 협업 문의</p>
+        <p class="desc">B2B 기업 · 미디어사 · 병의원 · 크리에이터를 위한<br>AI 미디어 파이프라인 도입 및 협업 문의</p>
         <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
           <a href="mailto:one@alltoone.co.kr" class="cta-btn">이메일 문의</a>
           <a href="tel:02-6959-7044" class="cta-btn cta-outline">02-6959-7044</a>
@@ -699,6 +713,7 @@
   <!-- ========== FOOTER ========== -->
   <footer>
     <div class="logo" style="margin-bottom:20px;font-size:12px;letter-spacing:4px;color:var(--t3)">ALL TO ONE</div>
+    <div style="margin-bottom:16px;font-size:10px;letter-spacing:2px;color:var(--accent);font-weight:600;text-transform:uppercase">Powered by AWS Cloud</div>
     <div class="ft-info">
       ㈜올투원 · 대표 우승호 · 서울시 용산구 이촌로64길24 샘물빌딩 301호<br>
       사업자등록번호 630-86-01070 · 02-6959-7044 · one@alltoone.co.kr
