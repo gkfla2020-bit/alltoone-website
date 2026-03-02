@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔷</text></svg>">
 
   <style>
     /* ===== RESET & VARS ===== */
@@ -146,11 +147,13 @@
     .hero-tag {
       font-size: 10px; letter-spacing: 7px; text-transform: uppercase;
       color: var(--accent); font-weight: 600; margin-bottom: 40px;
+      position: relative; z-index: 1;
     }
     .hero h1 {
       font-size: clamp(34px, 6vw, 74px);
       font-weight: 900; line-height: 1.08; letter-spacing: -2px;
       margin-bottom: 28px; max-width: 840px;
+      position: relative; z-index: 1;
     }
     .hero h1 .ln {
       display: block;
@@ -162,10 +165,12 @@
       font-size: clamp(13px, 1.4vw, 16px);
       color: var(--t2); font-weight: 300; line-height: 1.9;
       max-width: 500px;
+      position: relative; z-index: 1;
     }
     .hero-chips {
       display: flex; gap: 10px; margin-top: 36px;
       flex-wrap: wrap; justify-content: center;
+      position: relative; z-index: 1;
     }
     .chip {
       padding: 6px 16px; border-radius: 20px;
@@ -182,6 +187,7 @@
     .scroll-cue {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 1;
     }
     .scroll-cue span {
       font-size: 9px; letter-spacing: 4px;
@@ -210,7 +216,14 @@
       .rv { transition: none; opacity: 1; transform: none; }
       .scroll-cue .bar { animation: none; }
       body { animation: none; }
-      .chip, .step, .svc, .v-card, .img-box img, .char-img img { transition: none; }
+      .chip, .step, .svc, .v-card, .img-box img, .char-img img, .info-card, .info-bar-fill { transition: none; }
+      .info-bar-fill { width: var(--fill); }
+    }
+
+    /* ===== FOCUS VISIBLE ===== */
+    a:focus-visible, .cta-btn:focus-visible, .chip:focus-visible, .hamburger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     /* ===== SECTION BASE ===== */
@@ -311,22 +324,6 @@
       background: rgba(74,158,255,.1); color: var(--accent);
       margin-bottom: 16px;
     }
-    .case-metrics {
-      display: flex; gap: 32px; margin-top: 28px;
-    }
-    .metric {
-      text-align: left;
-    }
-    .metric .num {
-      font-size: 28px; font-weight: 800; letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .metric .label {
-      font-size: 11px; color: var(--t3); margin-top: 4px;
-      font-weight: 500; letter-spacing: .5px;
-    }
 
     /* ===== SERVICES GRID ===== */
     .svc-grid {
@@ -351,7 +348,7 @@
       box-shadow: inset 0 0 30px rgba(74,158,255,.03);
     }
     .svc:hover::before { opacity: 1; }
-    .svc-icon { font-size: 28px; margin-bottom: 20px; }
+    .svc-icon { font-size: 28px; margin-bottom: 20px; line-height: 1; }
     .svc h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
     .svc .sub {
       font-size: 10px; color: var(--accent); margin-bottom: 14px;
@@ -424,6 +421,45 @@
       box-shadow: none;
     }
 
+    /* ===== INFOGRAPHIC ===== */
+    .info-grid {
+      max-width: var(--mx); margin: 80px auto 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .info-card {
+      padding: 36px 24px; border-radius: var(--r);
+      background: var(--glass); border: 1px solid var(--border);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      text-align: center; transition: all .4s ease;
+      position: relative; overflow: hidden;
+    }
+    .info-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(74,158,255,.15);
+      box-shadow: inset 0 0 30px rgba(74,158,255,.03);
+    }
+    .info-card svg { margin: 0 auto 16px; }
+    .info-card .info-num {
+      font-size: 32px; font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 6px;
+    }
+    .info-card .info-label {
+      font-size: 12px; color: var(--t2); font-weight: 500;
+      letter-spacing: .5px;
+    }
+    .info-bar {
+      width: 100%; height: 4px; border-radius: 2px;
+      background: rgba(255,255,255,.06); margin-top: 16px; overflow: hidden;
+    }
+    .info-bar-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0%; transition: width 1.5s cubic-bezier(.16,1,.3,1);
+    }
+    .info-card.on .info-bar-fill { width: var(--fill); }
+
     /* ===== YT LINK ===== */
     .yt-link {
       display: inline-block; margin-top: 20px;
@@ -461,14 +497,21 @@
       .sec { padding: 90px 24px; }
       .two { grid-template-columns: 1fr; gap: 48px; }
       .two.flip .media { order: 0; }
+      .two.flip { margin-top: 72px !important; }
       .steps { grid-template-columns: 1fr 1fr; gap: 10px; }
       .svc-grid, .vision-grid { grid-template-columns: 1fr; gap: 12px; }
-      .case-metrics { flex-direction: column; gap: 16px; }
+      .info-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 48px; }
       .hero h1 { letter-spacing: -1px; }
+      .hero-sub { font-size: 14px; }
       .pipe-img { margin-top: 40px; }
       .pod-vid { margin-top: 40px; }
       footer { padding: 36px 24px; }
+      h2 { font-size: clamp(24px, 5vw, 36px); }
+      .desc { font-size: 13px; }
     }
+
+    /* Body scroll lock when mobile nav open */
+    body.nav-open { overflow: hidden; }
   </style>
 </head>
 <body>
@@ -583,16 +626,50 @@
         <p class="desc" style="margin-top:16px;margin-bottom:12px;color:var(--accent);font-size:12px;font-weight:600">Solution</p>
         <p class="desc">AI 파이프라인으로 로파이 음악, 팟캐스트, 블로그, 인포그래픽을 동시 생산. 스튜디오 녹음이나 성우 없이 전방위 디지털 미디어 생태계를 구축했습니다.</p>
         <a href="https://youtube.com/@isu_hani" target="_blank" rel="noopener" class="yt-link rv">YouTube 채널 보기 →</a>
-        <div class="rv case-metrics">
-          <div class="metric"><div class="num">90%+</div><div class="label">리소스 절감</div></div>
-          <div class="metric"><div class="num">1→N</div><div class="label">원소스 멀티유즈</div></div>
-          <div class="metric"><div class="num">24/7</div><div class="label">자동 콘텐츠 생산</div></div>
-        </div>
       </div>
       <div class="media rv d2">
         <div class="vid">
           <iframe src="https://www.youtube.com/embed/HWAcOtPFSWc?autoplay=1&mute=1&loop=1&playlist=HWAcOtPFSWc&rel=0&modestbranding=1&enablejsapi=1" title="이지업 소개" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
+      </div>
+    </div>
+    <!-- IMPACT INFOGRAPHIC -->
+    <div class="info-grid">
+      <div class="info-card rv" style="--fill:90%">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="url(#g1)" stroke-width="2" stroke-dasharray="4 4" opacity=".3"/>
+          <path d="M16 28L22 22L26 26L34 18" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="34" cy="18" r="3" fill="#4a9eff" opacity=".6"/>
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+        </svg>
+        <div class="info-num">90%+</div>
+        <div class="info-label">리소스 절감</div>
+        <div class="info-bar"><div class="info-bar-fill"></div></div>
+      </div>
+      <div class="info-card rv d1" style="--fill:100%">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="url(#g2)" stroke-width="2" stroke-dasharray="4 4" opacity=".3"/>
+          <circle cx="24" cy="20" r="5" stroke="url(#g2)" stroke-width="2"/>
+          <path d="M24 28V36M18 32H30" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="14" cy="34" r="3" stroke="url(#g2)" stroke-width="1.5" opacity=".5"/>
+          <circle cx="34" cy="34" r="3" stroke="url(#g2)" stroke-width="1.5" opacity=".5"/>
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+        </svg>
+        <div class="info-num">1→N</div>
+        <div class="info-label">원소스 멀티유즈</div>
+        <div class="info-bar"><div class="info-bar-fill"></div></div>
+      </div>
+      <div class="info-card rv d2" style="--fill:100%">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="url(#g3)" stroke-width="2" stroke-dasharray="4 4" opacity=".3"/>
+          <circle cx="24" cy="24" r="10" stroke="url(#g3)" stroke-width="2"/>
+          <path d="M24 16V24L30 28" stroke="url(#g3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="24" cy="24" r="2" fill="#7c3aed" opacity=".6"/>
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+        </svg>
+        <div class="info-num">24/7</div>
+        <div class="info-label">자동 콘텐츠 생산</div>
+        <div class="info-bar"><div class="info-bar-fill"></div></div>
       </div>
     </div>
   </section>
@@ -618,19 +695,19 @@
     </div>
     <div class="svc-grid">
       <div class="svc rv">
-        <div class="svc-icon">⚡</div>
+        <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 21L14 7L24 21" stroke="url(#si1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 14L14 7L19 14" stroke="url(#si1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><defs><linearGradient id="si1" x1="4" y1="7" x2="24" y2="21"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg></div>
         <h3>이지업 EasyUp</h3>
         <div class="sub">AI Media Publishing</div>
         <p>AI 파이프라인 연동 SEO 최적화 콘텐츠 자동 생산. 텍스트·이미지·음성 결합 옴니채널 운영으로 디지털 점유율을 극대화합니다.</p>
       </div>
       <div class="svc rv d1">
-        <div class="svc-icon">📊</div>
+        <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="8" width="6" height="16" rx="1" stroke="url(#si2)" stroke-width="2"/><rect x="11" y="4" width="6" height="20" rx="1" stroke="url(#si2)" stroke-width="2"/><rect x="19" y="12" width="6" height="12" rx="1" stroke="url(#si2)" stroke-width="2"/><defs><linearGradient id="si2" x1="3" y1="4" x2="25" y2="24"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg></div>
         <h3>비즈업 BizUp</h3>
         <div class="sub">Data-Driven Consulting</div>
         <p>클라우드 빅데이터 분석 기반 맞춤형 비즈니스 로드맵 설계. 트래픽·체류 시간·소비 패턴을 분석해 스케일업을 지원합니다.</p>
       </div>
       <div class="svc rv d2">
-        <div class="svc-icon">🌐</div>
+        <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="url(#si3)" stroke-width="2"/><path d="M14 4C14 4 8 10 8 14C8 18 14 24 14 24C14 24 20 18 20 14C20 10 14 4 14 4Z" stroke="url(#si3)" stroke-width="2"/><path d="M4 14H24" stroke="url(#si3)" stroke-width="2"/><defs><linearGradient id="si3" x1="4" y1="4" x2="24" y2="24"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg></div>
         <h3>힐링업 HealingUp</h3>
         <div class="sub">Cross-Border Healthcare</div>
         <p>글로벌 트래픽 기반 외국인 환자 유치 및 건강기능식품·의료기기 수출. AWS 글로벌 인프라로 국경을 초월합니다.</p>
@@ -702,6 +779,9 @@
         <div class="tag">Contact Us</div>
         <h2>당신의 도메인 지식을<br>무한한 미디어 자산으로</h2>
         <p class="desc">B2B 기업 · 미디어사 · 병의원 · 크리에이터를 위한<br>AI 미디어 파이프라인 도입 및 협업 문의</p>
+        <div style="margin-top:20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <span class="chip">Bedrock</span><span class="chip">Polly</span><span class="chip">S3</span><span class="chip">CloudFront</span><span class="chip">Lambda</span>
+        </div>
         <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
           <a href="mailto:one@alltoone.co.kr" class="cta-btn">이메일 문의</a>
           <a href="tel:02-6959-7044" class="cta-btn cta-outline">02-6959-7044</a>
@@ -769,6 +849,7 @@
           // Close mobile nav
           document.getElementById('mn').classList.remove('open');
           document.getElementById('hb').classList.remove('open');
+          document.body.classList.remove('nav-open');
         }
       });
     });
@@ -779,21 +860,24 @@
     hb.addEventListener('click', () => {
       hb.classList.toggle('open');
       mn.classList.toggle('open');
+      document.body.classList.toggle('nav-open');
     });
 
-    // Counter animation for metrics
-    const counterObs = new IntersectionObserver(entries => {
+    // Info card bar animation + counter
+    const infoObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting && !e.target.dataset.counted) {
-          e.target.dataset.counted = 'true';
-          const target = e.target.textContent;
-          if (target.includes('%')) {
-            animateNum(e.target, 0, 90, 1200, '%+');
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          const num = e.target.querySelector('.info-num');
+          if (num && !num.dataset.counted) {
+            num.dataset.counted = 'true';
+            const txt = num.textContent.trim();
+            if (txt.includes('%')) animateNum(num, 0, 90, 1200, '%+');
           }
         }
       });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.metric .num').forEach(el => counterObs.observe(el));
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.info-card').forEach(el => infoObs.observe(el));
 
     function animateNum(el, start, end, dur, suffix) {
       const t0 = performance.now();
