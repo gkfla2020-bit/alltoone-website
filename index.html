@@ -105,6 +105,16 @@
       top: 0; left: 50%; transform: translateX(-50%);
       pointer-events: none;
     }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+      pointer-events: none;
+    }
     .hero-tag {
       font-size: 10px; letter-spacing: 7px; text-transform: uppercase;
       color: var(--accent); font-weight: 600; margin-bottom: 40px;
@@ -130,10 +140,16 @@
       flex-wrap: wrap; justify-content: center;
     }
     .chip {
-      padding: 5px 14px; border-radius: 20px;
-      font-size: 10px; font-weight: 500; letter-spacing: .5px;
+      padding: 6px 16px; border-radius: 20px;
+      font-size: 11px; font-weight: 500; letter-spacing: .5px;
       border: 1px solid rgba(255,255,255,.1);
-      color: var(--t3); background: rgba(255,255,255,.02);
+      color: var(--t2); background: rgba(255,255,255,.03);
+      transition: all .3s ease;
+    }
+    .chip:hover {
+      border-color: rgba(74,158,255,.25);
+      background: rgba(74,158,255,.06);
+      color: var(--fg);
     }
     .scroll-cue {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
@@ -152,7 +168,7 @@
 
     /* ===== SECTION BASE ===== */
     .sec {
-      padding: 160px 56px;
+      padding: 140px 56px;
       position: relative;
       background: var(--bg);
     }
@@ -193,13 +209,13 @@
     .vid {
       border-radius: var(--r); overflow: hidden;
       aspect-ratio: 16/9; background: #080808;
-      box-shadow: 0 40px 80px rgba(0,0,0,.5);
+      box-shadow: 0 40px 80px rgba(0,0,0,.5), 0 0 60px rgba(74,158,255,.04);
       border: 1px solid var(--border);
     }
     .vid iframe { width: 100%; height: 100%; border: none; }
     .img-box {
       border-radius: var(--r); overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,.5);
+      box-shadow: 0 40px 80px rgba(0,0,0,.5), 0 0 60px rgba(74,158,255,.04);
       border: 1px solid var(--border);
     }
     .img-box img {
@@ -222,6 +238,7 @@
       text-align: center; padding: 32px 16px;
       border-radius: 20px;
       background: var(--glass); border: 1px solid var(--border);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       transition: all .4s ease;
     }
     .step:hover {
@@ -271,6 +288,7 @@
     .svc {
       padding: 44px 28px; border-radius: var(--r);
       background: var(--glass); border: 1px solid var(--border);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       transition: all .4s ease; position: relative; overflow: hidden;
     }
     .svc::before {
@@ -300,6 +318,7 @@
     .v-card {
       padding: 44px 28px; border-radius: var(--r);
       background: var(--glass); border: 1px solid var(--border);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       transition: all .4s ease;
     }
     .v-card:hover {
@@ -345,6 +364,15 @@
       transform: translateY(-3px);
       box-shadow: 0 20px 60px rgba(255,255,255,.1);
     }
+    .cta-outline {
+      background: transparent; color: var(--fg);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .cta-outline:hover {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.4);
+      box-shadow: none;
+    }
 
     /* ===== FOOTER ===== */
     footer {
@@ -370,7 +398,7 @@
       nav.scrolled { padding: 12px 24px; }
       .nav-links a:not(.cta-link) { display: none; }
       .nav-links { gap: 0; }
-      .sec { padding: 100px 24px; }
+      .sec { padding: 90px 24px; }
       .two { grid-template-columns: 1fr; gap: 48px; }
       .two.flip .media { order: 0; }
       .steps { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -475,6 +503,7 @@
         <span class="rv case-badge">Success Story</span>
         <h2>한의학 도메인의<br>멀티모달 미디어 전환</h2>
         <p class="desc">남성역 이수한의원의 진료 데이터를 AI 파이프라인으로 로파이 음악, 팟캐스트, 블로그, 인포그래픽으로 동시 변환. 스튜디오 녹음이나 성우 없이 병원의 전문성과 브랜드를 전달하는 미디어 자산을 구축했습니다.</p>
+        <a href="https://youtube.com/@isu_hani" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;font-size:12px;color:var(--accent);font-weight:500;letter-spacing:.5px;transition:color .3s">YouTube 채널 보기 →</a>
         <div class="rv case-metrics">
           <div class="metric"><div class="num">90%+</div><div class="label">리소스 절감</div></div>
           <div class="metric"><div class="num">1→N</div><div class="label">원소스 멀티유즈</div></div>
@@ -593,7 +622,7 @@
         <p class="desc">AI 미디어 파이프라인 도입 및 협업 문의</p>
         <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
           <a href="mailto:one@alltoone.co.kr" class="cta-btn">이메일 문의</a>
-          <a href="tel:02-6959-7044" class="cta-btn" style="background:transparent;color:var(--fg);border:1px solid rgba(255,255,255,.2)">02-6959-7044</a>
+          <a href="tel:02-6959-7044" class="cta-btn cta-outline">02-6959-7044</a>
         </div>
       </div>
     </div>
@@ -601,6 +630,7 @@
 
   <!-- ========== FOOTER ========== -->
   <footer>
+    <div class="logo" style="margin-bottom:20px;font-size:12px;letter-spacing:4px;color:var(--t3)">ALL TO ONE</div>
     <div class="ft-info">
       ㈜올투원 · 대표 우승호 · 서울시 용산구 이촌로64길24 샘물빌딩 301호<br>
       사업자등록번호 630-86-01070 · 02-6959-7044 · one@alltoone.co.kr
