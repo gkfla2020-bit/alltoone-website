@@ -218,6 +218,8 @@
       body { animation: none; }
       .chip, .step, .svc, .v-card, .img-box img, .char-img img, .info-card, .info-bar-fill { transition: none; }
       .info-bar-fill { width: var(--fill); }
+      .info-card svg * { animation: none !important; }
+      .info-card svg animate, .info-card svg animateTransform { display: none; }
     }
 
     /* ===== FOCUS VISIBLE ===== */
@@ -438,7 +440,7 @@
       border-color: rgba(74,158,255,.15);
       box-shadow: inset 0 0 30px rgba(74,158,255,.03);
     }
-    .info-card svg { margin: 0 auto 16px; }
+    .info-card svg { margin: 0 auto 16px; width: 56px; height: 56px; }
     .info-card .info-num {
       font-size: 32px; font-weight: 900; letter-spacing: -1px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -636,36 +638,100 @@
     <!-- IMPACT INFOGRAPHIC -->
     <div class="info-grid">
       <div class="info-card rv" style="--fill:90%">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="22" stroke="url(#g1)" stroke-width="2" stroke-dasharray="4 4" opacity=".3"/>
-          <path d="M16 28L22 22L26 26L34 18" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="34" cy="18" r="3" fill="#4a9eff" opacity=".6"/>
-          <defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+        <!-- 리소스 절감: 그래프가 줄어드는 애니메이션 -->
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="26" stroke="url(#ga1)" stroke-width="1.5" stroke-dasharray="4 4" opacity=".2"/>
+          <rect x="12" y="18" width="6" height="26" rx="2" fill="url(#ga1)" opacity=".15">
+            <animate attributeName="height" values="26;10;26" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="18;34;18" dur="3s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="22" y="14" width="6" height="30" rx="2" fill="url(#ga1)" opacity=".25">
+            <animate attributeName="height" values="30;8;30" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="14;36;14" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="32" y="22" width="6" height="22" rx="2" fill="url(#ga1)" opacity=".35">
+            <animate attributeName="height" values="22;6;22" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="22;38;22" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+          </rect>
+          <path d="M10 44H46" stroke="url(#ga1)" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
+          <path d="M12 32L22 26L32 30L42 16" stroke="url(#ga1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60">
+            <animate attributeName="stroke-dashoffset" values="60;0" dur="2s" fill="freeze" begin="0.5s"/>
+          </path>
+          <circle cx="42" cy="16" r="3" fill="#4a9eff" opacity=".7">
+            <animate attributeName="opacity" values="0;.7" dur="2s" fill="freeze" begin="1.5s"/>
+          </circle>
+          <defs><linearGradient id="ga1" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div class="info-num">90%+</div>
         <div class="info-label">리소스 절감</div>
         <div class="info-bar"><div class="info-bar-fill"></div></div>
       </div>
       <div class="info-card rv d1" style="--fill:100%">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="22" stroke="url(#g2)" stroke-width="2" stroke-dasharray="4 4" opacity=".3"/>
-          <circle cx="24" cy="20" r="5" stroke="url(#g2)" stroke-width="2"/>
-          <path d="M24 28V36M18 32H30" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="14" cy="34" r="3" stroke="url(#g2)" stroke-width="1.5" opacity=".5"/>
-          <circle cx="34" cy="34" r="3" stroke="url(#g2)" stroke-width="1.5" opacity=".5"/>
-          <defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+        <!-- 원소스 멀티유즈: 트리형 파생 애니메이션 -->
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="26" stroke="url(#ga2)" stroke-width="1.5" stroke-dasharray="4 4" opacity=".2"/>
+          <!-- 중심 노드 -->
+          <circle cx="28" cy="14" r="5" stroke="url(#ga2)" stroke-width="2" fill="rgba(74,158,255,.1)"/>
+          <!-- 가지 라인들 -->
+          <path d="M28 19V28" stroke="url(#ga2)" stroke-width="1.5" opacity=".4" stroke-dasharray="20" stroke-dashoffset="20">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="1s" fill="freeze" begin="0.3s"/>
+          </path>
+          <path d="M28 28L14 40" stroke="url(#ga2)" stroke-width="1.5" opacity=".4" stroke-dasharray="20" stroke-dashoffset="20">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="0.8s" fill="freeze" begin="0.8s"/>
+          </path>
+          <path d="M28 28L28 42" stroke="url(#ga2)" stroke-width="1.5" opacity=".4" stroke-dasharray="20" stroke-dashoffset="20">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="0.8s" fill="freeze" begin="1s"/>
+          </path>
+          <path d="M28 28L42 40" stroke="url(#ga2)" stroke-width="1.5" opacity=".4" stroke-dasharray="20" stroke-dashoffset="20">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="0.8s" fill="freeze" begin="1.2s"/>
+          </path>
+          <!-- 파생 노드들 -->
+          <circle cx="14" cy="40" r="4" stroke="url(#ga2)" stroke-width="1.5" fill="rgba(124,58,237,.1)" opacity="0">
+            <animate attributeName="opacity" values="0;1" dur="0.4s" fill="freeze" begin="1.4s"/>
+          </circle>
+          <circle cx="28" cy="42" r="4" stroke="url(#ga2)" stroke-width="1.5" fill="rgba(124,58,237,.1)" opacity="0">
+            <animate attributeName="opacity" values="0;1" dur="0.4s" fill="freeze" begin="1.6s"/>
+          </circle>
+          <circle cx="42" cy="40" r="4" stroke="url(#ga2)" stroke-width="1.5" fill="rgba(124,58,237,.1)" opacity="0">
+            <animate attributeName="opacity" values="0;1" dur="0.4s" fill="freeze" begin="1.8s"/>
+          </circle>
+          <!-- 펄스 -->
+          <circle cx="28" cy="14" r="5" stroke="#4a9eff" stroke-width="1" fill="none" opacity="0">
+            <animate attributeName="r" values="5;12" dur="2s" repeatCount="indefinite" begin="2s"/>
+            <animate attributeName="opacity" values=".4;0" dur="2s" repeatCount="indefinite" begin="2s"/>
+          </circle>
+          <defs><linearGradient id="ga2" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div class="info-num">1→N</div>
         <div class="info-label">원소스 멀티유즈</div>
         <div class="info-bar"><div class="info-bar-fill"></div></div>
       </div>
       <div class="info-card rv d2" style="--fill:100%">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="22" stroke="url(#g3)" stroke-width="2" stroke-dasharray="4 4" opacity=".3"/>
-          <circle cx="24" cy="24" r="10" stroke="url(#g3)" stroke-width="2"/>
-          <path d="M24 16V24L30 28" stroke="url(#g3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="24" cy="24" r="2" fill="#7c3aed" opacity=".6"/>
-          <defs><linearGradient id="g3" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+        <!-- 24/7: 계속 돌아가는 애니메이션 -->
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="26" stroke="url(#ga3)" stroke-width="1.5" stroke-dasharray="4 4" opacity=".2"/>
+          <!-- 외곽 회전 링 -->
+          <circle cx="28" cy="28" r="22" stroke="url(#ga3)" stroke-width="1.5" stroke-dasharray="8 12" stroke-linecap="round" opacity=".3">
+            <animateTransform attributeName="transform" type="rotate" values="0 28 28;360 28 28" dur="8s" repeatCount="indefinite"/>
+          </circle>
+          <!-- 내부 시계 원 -->
+          <circle cx="28" cy="28" r="14" stroke="url(#ga3)" stroke-width="2" opacity=".5"/>
+          <!-- 시침 (느리게) -->
+          <line x1="28" y1="28" x2="28" y2="18" stroke="url(#ga3)" stroke-width="2.5" stroke-linecap="round">
+            <animateTransform attributeName="transform" type="rotate" values="0 28 28;360 28 28" dur="12s" repeatCount="indefinite"/>
+          </line>
+          <!-- 분침 (빠르게) -->
+          <line x1="28" y1="28" x2="28" y2="16" stroke="url(#ga3)" stroke-width="1.5" stroke-linecap="round" opacity=".6">
+            <animateTransform attributeName="transform" type="rotate" values="0 28 28;360 28 28" dur="4s" repeatCount="indefinite"/>
+          </line>
+          <!-- 중심점 -->
+          <circle cx="28" cy="28" r="2.5" fill="#7c3aed" opacity=".7"/>
+          <!-- 글로우 펄스 -->
+          <circle cx="28" cy="28" r="14" stroke="#4a9eff" stroke-width="1" fill="none" opacity="0">
+            <animate attributeName="r" values="14;20" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".3;0" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <defs><linearGradient id="ga3" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div class="info-num">24/7</div>
         <div class="info-label">자동 콘텐츠 생산</div>
