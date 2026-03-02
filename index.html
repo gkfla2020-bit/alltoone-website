@@ -116,7 +116,7 @@
     }
     .hero h1 .ln {
       display: block;
-      background: linear-gradient(135deg, #fff 20%, rgba(255,255,255,.45));
+      background: linear-gradient(135deg, #fff 30%, rgba(255,255,255,.65));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -158,6 +158,11 @@
     }
     .sec-alt {
       background: linear-gradient(180deg, #000 0%, #060e1a 50%, #000 100%);
+    }
+    .sec-alt::before {
+      content: ''; position: absolute; top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,158,255,.08), transparent);
     }
     .ctr { max-width: 680px; margin: 0 auto; text-align: center; }
     .tag {
@@ -320,7 +325,7 @@
 
     /* ===== CHARACTER ===== */
     .char-img {
-      max-width: 520px; margin: 0;
+      max-width: 520px; margin: 0 auto;
     }
     .char-img img {
       border-radius: 28px;
@@ -364,6 +369,7 @@
       nav { padding: 16px 24px; }
       nav.scrolled { padding: 12px 24px; }
       .nav-links a:not(.cta-link) { display: none; }
+      .nav-links { gap: 0; }
       .sec { padding: 100px 24px; }
       .two { grid-template-columns: 1fr; gap: 48px; }
       .two.flip .media { order: 0; }
@@ -371,6 +377,9 @@
       .svc-grid, .vision-grid { grid-template-columns: 1fr; gap: 12px; }
       .case-metrics { flex-direction: column; gap: 16px; }
       .hero h1 { letter-spacing: -1px; }
+      .pipe-img { margin-top: 40px; }
+      .pod-vid { margin-top: 40px; }
+      footer { padding: 36px 24px; }
     }
   </style>
 </head>
@@ -396,8 +405,7 @@
       <span class="ln">멀티모달 미디어 자산으로</span>
     </h1>
     <p class="rv d2 hero-sub">
-      하나의 지식(One Source)에서 출발해<br>
-      초자동화된 AI 파이프라인으로<br>
+      하나의 지식에서 출발해, 초자동화된 AI 파이프라인으로<br>
       텍스트 · 오디오 · 비디오 · 인포그래픽을 동시에 생산합니다
     </p>
     <div class="rv d3 hero-chips">
@@ -464,10 +472,10 @@
     <div class="two">
       <div class="text rv">
         <div class="tag">Use Case</div>
-        <span class="case-badge">Success Story</span>
+        <span class="rv case-badge">Success Story</span>
         <h2>한의학 도메인의<br>멀티모달 미디어 전환</h2>
-        <p class="desc">남성역 이수한의원의 전문적인 진료 데이터를 AI 파이프라인을 통해 로파이 음악, 팟캐스트, 블로그, 인포그래픽으로 동시 변환. 별도의 스튜디오 녹음이나 성우 섭외 없이 병원의 전문성과 브랜드 이미지를 효과적으로 전달하는 미디어 자산을 구축했습니다.</p>
-        <div class="case-metrics">
+        <p class="desc">남성역 이수한의원의 진료 데이터를 AI 파이프라인으로 로파이 음악, 팟캐스트, 블로그, 인포그래픽으로 동시 변환. 스튜디오 녹음이나 성우 없이 병원의 전문성과 브랜드를 전달하는 미디어 자산을 구축했습니다.</p>
+        <div class="rv case-metrics">
           <div class="metric"><div class="num">90%+</div><div class="label">리소스 절감</div></div>
           <div class="metric"><div class="num">1→N</div><div class="label">원소스 멀티유즈</div></div>
           <div class="metric"><div class="num">24/7</div><div class="label">자동 콘텐츠 생산</div></div>
@@ -486,7 +494,7 @@
     <div class="ctr">
       <div class="tag rv">AI Podcast Production</div>
       <h2 class="rv d1">AI가 제작하는<br>멀티모달 오디오 미디어</h2>
-      <p class="desc rv d2">Amazon Polly TTS 기술로 전문 의학 칼럼을 고품질 AI 보이스 팟캐스트로 구현하고,<br>Lo-Fi 감성의 힐링 배경 음악을 AI로 큐레이션하여 정보 전달과 감성적 공감을 동시에 설계합니다</p>
+      <p class="desc rv d2">Amazon Polly TTS 기술로 전문 의학 칼럼을 고품질 AI 보이스 팟캐스트로 구현하고, Lo-Fi 감성의 힐링 배경 음악을 AI로 큐레이션하여 정보 전달과 감성적 공감을 동시에 설계합니다</p>
     </div>
     <div class="pod-vid rv d3">
       <iframe src="https://www.youtube.com/embed/n4X0wqgGpgc?autoplay=1&mute=1&loop=1&playlist=n4X0wqgGpgc&rel=0&modestbranding=1&enablejsapi=1" title="AI 팟캐스트" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
@@ -505,19 +513,19 @@
         <div class="svc-icon">⚡</div>
         <h3>이지업 EasyUp</h3>
         <div class="sub">AI Media Publishing</div>
-        <p>AI 자동화 파이프라인과 연동되어 SEO 최적화 콘텐츠를 자동 생산하는 트래픽 제너레이터. 텍스트·이미지·음성이 결합된 옴니채널 미디어 운영으로 디지털 브랜드 점유율을 극대화합니다.</p>
+        <p>AI 파이프라인 연동 SEO 최적화 콘텐츠 자동 생산. 텍스트·이미지·음성 결합 옴니채널 운영으로 디지털 점유율을 극대화합니다.</p>
       </div>
       <div class="svc rv d1">
         <div class="svc-icon">📊</div>
         <h3>비즈업 BizUp</h3>
         <div class="sub">Data-Driven Consulting</div>
-        <p>클라우드 상에 수집된 트래픽, 체류 시간, 미디어 소비 패턴 등의 빅데이터를 분석하여 기업의 성장 단계에 부합하는 맞춤형 비즈니스 로드맵을 설계하고 스케일업을 지원합니다.</p>
+        <p>클라우드 빅데이터 분석 기반 맞춤형 비즈니스 로드맵 설계. 트래픽·체류 시간·소비 패턴을 분석해 스케일업을 지원합니다.</p>
       </div>
       <div class="svc rv d2">
         <div class="svc-icon">🌐</div>
         <h3>힐링업 HealingUp</h3>
         <div class="sub">Cross-Border Healthcare</div>
-        <p>전 세계로 퍼져나간 멀티미디어 자산이 만들어낸 글로벌 트래픽을 기반으로, 외국인 환자 유치 및 건강기능식품·의료기기 수출을 주도합니다. AWS 글로벌 인프라로 국경을 초월합니다.</p>
+        <p>글로벌 트래픽 기반 외국인 환자 유치 및 건강기능식품·의료기기 수출. AWS 글로벌 인프라로 국경을 초월합니다.</p>
       </div>
     </div>
   </section>
@@ -561,7 +569,7 @@
       <div class="v-card rv">
         <div class="v-num">NEXT 01</div>
         <h3>에이전틱 AI<br>미디어 자동화 데스크</h3>
-        <p>AI 에이전트가 스스로 트렌드를 분석하고 주제를 선정하여, 초안 작성부터 이미지 생성, 다국어 번역까지 자율적으로 수행하는 에이전틱 AI 뉴스룸을 구축합니다.</p>
+        <p>AI 에이전트가 자율적으로 트렌드를 분석하고 주제를 선정하여, 초안 작성부터 이미지 생성, 다국어 번역까지 수행하는 에이전틱 AI 뉴스룸을 구축합니다.</p>
       </div>
       <div class="v-card rv d1">
         <div class="v-num">NEXT 02</div>
@@ -583,7 +591,10 @@
         <div class="tag">Contact Us</div>
         <h2>당신의 도메인 지식을<br>무한한 미디어 자산으로</h2>
         <p class="desc">AI 미디어 파이프라인 도입 및 협업 문의</p>
-        <a href="mailto:one@alltoone.co.kr" class="cta-btn">문의하기</a>
+        <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="mailto:one@alltoone.co.kr" class="cta-btn">이메일 문의</a>
+          <a href="tel:02-6959-7044" class="cta-btn" style="background:transparent;color:var(--fg);border:1px solid rgba(255,255,255,.2)">02-6959-7044</a>
+        </div>
       </div>
     </div>
   </section>
