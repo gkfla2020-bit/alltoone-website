@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All to One | AI-Native Media Tech Studio</title>
+  <title>All to One | AI-Native Media Tech Studio (Interactive)</title>
 
   <!-- OG / SEO -->
   <meta property="og:title" content="㈜올투원 | AI-Native B2B 미디어 테크 스튜디오">
@@ -127,6 +127,16 @@
       position: relative; overflow: hidden;
       background: radial-gradient(ellipse at 50% 25%, #0d1f3c 0%, #050a14 40%, #000 75%);
     }
+    #heroCanvas {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    }
+    .mouse-glow {
+      position: fixed; width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,158,255,.07), transparent 70%);
+      pointer-events: none; z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left .15s ease-out, top .15s ease-out;
+    }
     .hero::before {
       content: ''; position: absolute;
       width: 800px; height: 800px; border-radius: 50%;
@@ -199,6 +209,25 @@
       animation: pulse 2.5s ease-in-out infinite;
     }
     @keyframes pulse { 0%,100%{opacity:.2} 50%{opacity:.8} }
+
+    /* ===== TYPING CURSOR ===== */
+    .typing-cursor {
+      display: inline-block; width: 2px; height: 1em;
+      background: var(--accent); margin-left: 2px;
+      animation: blink .8s step-end infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ===== TILT CARD ===== */
+    .tilt-card {
+      transition: transform .15s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    /* ===== MAGNETIC BUTTON ===== */
+    .magnetic-btn {
+      transition: transform .2s ease-out;
+    }
 
     /* ===== SCROLL PROGRESS BAR ===== */
     .scroll-progress {
@@ -702,7 +731,9 @@
   </div>
 
   <!-- ========== HERO ========== -->
+  <div class="mouse-glow" id="mouseGlow"></div>
   <section class="hero">
+    <canvas id="heroCanvas"></canvas>
     <div class="rv hero-tag">AI-Native B2B Media Tech Studio</div>
     <h1 class="rv d1">
       <span class="ln">도메인 지식을</span>
@@ -748,22 +779,22 @@
       <img src="https://raw.githubusercontent.com/gkfla2020-bit/alltoone-website/main/AI%EB%AF%B8%EB%94%94%EC%96%B4%20%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8.png" alt="AI 미디어 파이프라인 구조도" loading="lazy">
     </div>
     <div class="steps">
-      <div class="step rv">
+      <div class="step rv tilt-card">
         <div class="step-n">01</div>
         <h3>Amazon Bedrock</h3>
         <p>진료 철학을 타겟 연령·성향에 맞춘 유튜브 대본, 블로그, 인포그래픽으로 동시 확장 생성</p>
       </div>
-      <div class="step rv d1">
+      <div class="step rv tilt-card d1">
         <div class="step-n">02</div>
         <h3>Amazon Polly</h3>
         <p>생성된 콘텐츠를 자연스러운 팟캐스트 및 Lo-Fi 오디오로 즉시 변환</p>
       </div>
-      <div class="step rv d2">
+      <div class="step rv tilt-card d2">
         <div class="step-n">03</div>
         <h3>Amazon S3</h3>
         <p>모든 미디어 자산을 안전하게 저장하고 체계적으로 관리</p>
       </div>
-      <div class="step rv d3">
+      <div class="step rv tilt-card d3">
         <div class="step-n">04</div>
         <h3>CloudFront CDN</h3>
         <p>전 세계에 지연 없이 전송, 대규모 트래픽에도 자동 스케일링</p>
@@ -954,19 +985,19 @@
       <p class="desc rv d2">AWS 클라우드 AI 인프라 위에서 구동되는 통합 솔루션</p>
     </div>
     <div class="svc-grid">
-      <div class="svc rv">
+      <div class="svc rv tilt-card">
         <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 21L14 7L24 21" stroke="url(#si1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 14L14 7L19 14" stroke="url(#si1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><defs><linearGradient id="si1" x1="4" y1="7" x2="24" y2="21"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg></div>
         <h3>이지업 EasyUp</h3>
         <div class="sub">AI Media Publishing</div>
         <p>AI 파이프라인 연동 SEO 최적화 콘텐츠 자동 생산. 텍스트·이미지·음성 결합 옴니채널 운영으로 디지털 점유율을 극대화합니다.</p>
       </div>
-      <div class="svc rv d1">
+      <div class="svc rv tilt-card d1">
         <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="8" width="6" height="16" rx="1" stroke="url(#si2)" stroke-width="2"/><rect x="11" y="4" width="6" height="20" rx="1" stroke="url(#si2)" stroke-width="2"/><rect x="19" y="12" width="6" height="12" rx="1" stroke="url(#si2)" stroke-width="2"/><defs><linearGradient id="si2" x1="3" y1="4" x2="25" y2="24"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg></div>
         <h3>비즈업 BizUp</h3>
         <div class="sub">Data-Driven Consulting</div>
         <p>클라우드 빅데이터 분석 기반 맞춤형 비즈니스 로드맵 설계. 트래픽·체류 시간·소비 패턴을 분석해 스케일업을 지원합니다.</p>
       </div>
-      <div class="svc rv d2">
+      <div class="svc rv tilt-card d2">
         <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="url(#si3)" stroke-width="2"/><path d="M14 4C14 4 8 10 8 14C8 18 14 24 14 24C14 24 20 18 20 14C20 10 14 4 14 4Z" stroke="url(#si3)" stroke-width="2"/><path d="M4 14H24" stroke="url(#si3)" stroke-width="2"/><defs><linearGradient id="si3" x1="4" y1="4" x2="24" y2="24"><stop stop-color="#4a9eff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg></div>
         <h3>힐링업 HealingUp</h3>
         <div class="sub">Cross-Border Healthcare</div>
@@ -1029,19 +1060,19 @@
       <p class="desc rv d2">올투원이 구현할 차세대 AI 미디어 서비스</p>
     </div>
     <div class="vision-grid">
-      <div class="v-card rv">
+      <div class="v-card rv tilt-card">
         <div class="v-num">NEXT 01</div>
         <h3>에이전틱 AI<br>미디어 자동화 데스크</h3>
         <p>AI 에이전트가 자율적으로 트렌드를 분석하고 주제를 선정하여, 초안 작성부터 이미지 생성, 다국어 번역까지 수행하는 에이전틱 AI 뉴스룸을 구축합니다.</p>
         <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip">Bedrock Agents</span><span class="chip">Lambda</span></div>
       </div>
-      <div class="v-card rv d1">
+      <div class="v-card rv tilt-card d1">
         <div class="v-num">NEXT 02</div>
         <h3>초개인화<br>다이내믹 퍼블리싱</h3>
         <p>독자의 정보 소비 성향에 맞춰 동일한 콘텐츠를 인포그래픽·오디오·상세 텍스트 등 다양한 버전으로 실시간 자동 변환하여 제공합니다.</p>
         <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip">Personalize</span><span class="chip">CloudFront</span></div>
       </div>
-      <div class="v-card rv d2">
+      <div class="v-card rv tilt-card d2">
         <div class="v-num">NEXT 03</div>
         <h3>데이터 시각화<br>자동화 솔루션</h3>
         <p>복잡한 정책·시장 지표·금융 데이터 등의 로우 데이터를 입력하면, 주요 인사이트를 추출해 즉각적으로 고품질 인포그래픽으로 렌더링합니다.</p>
@@ -1061,7 +1092,7 @@
           <span class="chip">Bedrock</span><span class="chip">Polly</span><span class="chip">S3</span><span class="chip">CloudFront</span><span class="chip">Lambda</span>
         </div>
         <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-          <a href="mailto:one@alltoone.co.kr" class="cta-btn">이메일 문의</a>
+          <a href="mailto:one@alltoone.co.kr" class="cta-btn magnetic-btn">이메일 문의</a>
           <a href="tel:02-6959-7044" class="cta-btn cta-outline">02-6959-7044</a>
         </div>
       </div>
@@ -1167,6 +1198,178 @@
       }
       requestAnimationFrame(tick);
     }
+    // ===== INTERACTIVE: PARTICLE CANVAS =====
+    (function() {
+      var c = document.getElementById('heroCanvas');
+      if (!c) return;
+      var ctx = c.getContext('2d');
+      var particles = [];
+      var mouse = { x: -999, y: -999 };
+
+      function resize() {
+        c.width = c.parentElement.offsetWidth;
+        c.height = c.parentElement.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (var i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * c.width,
+          y: Math.random() * c.height,
+          r: Math.random() * 1.5 + 0.5,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          o: Math.random() * 0.4 + 0.1
+        });
+      }
+
+      c.parentElement.addEventListener('mousemove', function(e) {
+        var rect = c.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      c.parentElement.addEventListener('mouseleave', function() {
+        mouse.x = -999; mouse.y = -999;
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = c.width;
+          if (p.x > c.width) p.x = 0;
+          if (p.y < 0) p.y = c.height;
+          if (p.y > c.height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(74,158,255,' + p.o + ')';
+          ctx.fill();
+
+          // 마우스 근처 파티클 연결선
+          var dx = mouse.x - p.x, dy = mouse.y - p.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = 'rgba(74,158,255,' + (0.15 * (1 - dist / 150)) + ')';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+
+          // 파티클끼리 연결
+          for (var j = i + 1; j < particles.length; j++) {
+            var p2 = particles[j];
+            var d = Math.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2);
+            if (d < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = 'rgba(74,158,255,' + (0.06 * (1 - d / 120)) + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ===== INTERACTIVE: MOUSE GLOW =====
+    (function() {
+      var glow = document.getElementById('mouseGlow');
+      if (!glow) return;
+      document.addEventListener('mousemove', function(e) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    })();
+
+    // ===== INTERACTIVE: TILT CARDS =====
+    (function() {
+      document.querySelectorAll('.tilt-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = 'perspective(600px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg) translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
+        });
+      });
+    })();
+
+    // ===== INTERACTIVE: MAGNETIC BUTTONS =====
+    (function() {
+      document.querySelectorAll('.magnetic-btn').forEach(function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+          var rect = btn.getBoundingClientRect();
+          var x = e.clientX - rect.left - rect.width / 2;
+          var y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = 'translate(' + (x * 0.2) + 'px,' + (y * 0.2) + 'px) translateY(-3px)';
+        });
+        btn.addEventListener('mouseleave', function() {
+          btn.style.transform = '';
+        });
+      });
+    })();
+
+    // ===== INTERACTIVE: HERO TYPING EFFECT =====
+    (function() {
+      var el = document.querySelector('.hero-sub');
+      if (!el) return;
+      var original = el.innerHTML;
+      var text = el.textContent;
+      el.textContent = '';
+      el.style.opacity = '1';
+      var i = 0;
+      var cursor = document.createElement('span');
+      cursor.className = 'typing-cursor';
+      el.appendChild(cursor);
+
+      function type() {
+        if (i < text.length) {
+          el.insertBefore(document.createTextNode(text[i]), cursor);
+          i++;
+          setTimeout(type, 25 + Math.random() * 20);
+        } else {
+          setTimeout(function() { cursor.remove(); el.innerHTML = original; }, 1500);
+        }
+      }
+
+      var heroObs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          heroObs.disconnect();
+          setTimeout(type, 600);
+        }
+      }, { threshold: 0.5 });
+      heroObs.observe(el);
+    })();
+
+    // ===== INTERACTIVE: PARALLAX SECTIONS =====
+    (function() {
+      var secs = document.querySelectorAll('.sec');
+      window.addEventListener('scroll', function() {
+        var sy = window.scrollY;
+        secs.forEach(function(sec) {
+          var top = sec.offsetTop;
+          var h = sec.offsetHeight;
+          if (sy > top - window.innerHeight && sy < top + h) {
+            var progress = (sy - top + window.innerHeight) / (window.innerHeight + h);
+            var media = sec.querySelector('.media');
+            if (media) {
+              media.style.transform = 'translateY(' + ((progress - 0.5) * -20) + 'px)';
+            }
+          }
+        });
+      });
+    })();
+
     // ===== CHATBOT DEMO =====
     (function() {
       var body = document.getElementById('chatBody');
